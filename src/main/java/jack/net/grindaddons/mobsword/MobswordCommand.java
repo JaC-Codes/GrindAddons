@@ -7,13 +7,13 @@ import jack.net.grindaddons.utilities.Misc;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-public class MobswordCommand extends SubCommand {
+public class MobSwordCommand extends SubCommand {
 
     private final Core core;
     private final Items item;
     private final Misc misc;
 
-    public MobswordCommand(Core core) {
+    public MobSwordCommand(Core core) {
         this.core = core;
         this.item = new Items(core);
         this.misc = new Misc(core);
