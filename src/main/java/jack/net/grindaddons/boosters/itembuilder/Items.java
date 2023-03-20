@@ -4,6 +4,7 @@ import jack.net.grindaddons.Core;
 import jack.net.grindaddons.boosters.Boosters;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -14,6 +15,7 @@ public class Items {
     private final NamespacedKey doubleXpKey;
     private final NamespacedKey x2MultiplierKey;
     private final NamespacedKey x3MultiplierKey;
+    private final NamespacedKey mobSwordKey;
 
 
     public Items(Core core) {
@@ -23,6 +25,7 @@ public class Items {
         this.doubleXpKey = new NamespacedKey(core, "doublexp");
         this.x2MultiplierKey = new NamespacedKey(core, "x2multiplier");
         this.x3MultiplierKey = new NamespacedKey(core, "x3multiplier");
+        this.mobSwordKey = new NamespacedKey(core, "mobsword");
     }
 
     public ItemStack getDoubleXpItem() {
@@ -47,5 +50,26 @@ public class Items {
 
     public void giveX3Multiplier(Player player) {
         player.getInventory().addItem(getX3MultiplierItem());
+    }
+
+    public ItemStack getMobSwordItem(int amount) {
+        String itemCheck = this.core.getMobSwordConfiguration().getString("Mobsword.Item.material");
+        if (itemCheck == null) {
+            System.out.println("Can't find config path for mob sword material");
+        }
+        Material material = Material.matchMaterial(itemCheck);
+        if (material == null) {
+            System.out.println("Can't match material");
+        }
+        return new ItemBuild((material), amount)
+                .setDisplayName(this.core.getMobSwordConfiguration().getString("Mobsword.Item.display-name"))
+                .addKey(mobSwordKey, "mobsword").setLore(String.valueOf(this.core.getMobSwordConfiguration().getStringList("Mobsword.Item.lore")))
+                .setItemGlowing()
+                .setUnsafeEnchant(Enchantment.FIRE_ASPECT, 1)
+                .build();
+    }
+
+    public void giveMobSword(Player player, int amount) {
+        player.getInventory().addItem(getMobSwordItem(amount));
     }
 }

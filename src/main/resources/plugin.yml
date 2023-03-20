@@ -4,5 +4,5 @@ Author: Jack
 version: 0.1
 main: jack.net.grindaddons.Core
 commands:
-  boosters:
-    description: Boosters
+  grindaddons:
+    description: Base command

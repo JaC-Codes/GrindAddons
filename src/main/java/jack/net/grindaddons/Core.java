@@ -1,6 +1,6 @@
 package jack.net.grindaddons;
 
-import jack.net.grindaddons.boosters.commandmanager.CommandManager;
+import jack.net.grindaddons.commandmanager.CommandManager;
 import jack.net.grindaddons.boosters.listeners.DoubleXpListener;
 import jack.net.grindaddons.utilities.Config;
 import lombok.Getter;
@@ -18,8 +18,10 @@ public class Core extends JavaPlugin {
     private Core instance;
 
     private final File sugarLandSettings = new File(getDataFolder(), "sugarland.yml");
+    private final File mobSwordSettings = new File(getDataFolder(), "mobsword.yml");
 
     private final FileConfiguration sugarLandConfiguration = YamlConfiguration.loadConfiguration(sugarLandSettings);
+    private final FileConfiguration mobSwordConfiguration = YamlConfiguration.loadConfiguration(mobSwordSettings);
 
     public void onEnable() {
         instance = this;
@@ -39,10 +41,10 @@ public class Core extends JavaPlugin {
     }
 
     private void registerCommands() {
-        if (getCommand("boosters") == null) {
-            System.out.println("Can't find boosters command");
+        if (getCommand("grindaddons") == null) {
+            System.out.println("Can't find main command");
         }
-        getCommand("boosters").setExecutor(new CommandManager(this));
+        getCommand("grindaddons").setExecutor(new CommandManager(this));
     }
 
     private void registerEvents() {
@@ -54,6 +56,7 @@ public class Core extends JavaPlugin {
         getConfig().options().copyDefaults();
         saveDefaultConfig();
         new Config(sugarLandSettings, sugarLandConfiguration, "sugarland.yml", this);
+        new Config(mobSwordSettings, mobSwordConfiguration, "mobsword.yml", this);
     }
 
     public void onDisable() {

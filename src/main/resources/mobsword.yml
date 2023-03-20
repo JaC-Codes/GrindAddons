@@ -1,0 +1,7 @@
+Mobsword:
+  item:
+    material:
+    display-name: "&8(&e!&8) &6&lMob&e&lSword &8(&e!&8)"
+    lore:
+      - ""
+      - "&8(&e!&8) &eRight click to open the menu! &8(&e!&8)"

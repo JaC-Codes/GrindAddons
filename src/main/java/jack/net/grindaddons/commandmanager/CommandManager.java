@@ -1,4 +1,4 @@
-package jack.net.grindaddons.boosters.commandmanager;
+package jack.net.grindaddons.commandmanager;
 
 import jack.net.grindaddons.Core;
 import jack.net.grindaddons.boosters.commands.BoosterCommands;

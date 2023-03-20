@@ -2,7 +2,7 @@ package jack.net.grindaddons.boosters.commands;
 
 import jack.net.grindaddons.Core;
 import jack.net.grindaddons.boosters.Boosters;
-import jack.net.grindaddons.boosters.commandmanager.SubCommand;
+import jack.net.grindaddons.commandmanager.SubCommand;
 import jack.net.grindaddons.boosters.itembuilder.Items;
 import jack.net.grindaddons.utilities.CC;
 import jack.net.grindaddons.utilities.Misc;
@@ -23,7 +23,7 @@ public class BoosterCommands extends SubCommand {
 
     @Override
     public String getName() {
-        return "give";
+        return "boosters";
     }
 
     // Boosters give <player> <booster> <amount>
@@ -39,16 +39,16 @@ public class BoosterCommands extends SubCommand {
             player.sendMessage("&cYou do not have permission to use this command.");
         }
 
-        argsCheck(player, args);
+        misc.usage(player);
 
-        if (args.length == 4) {
+        if (args.length == 4 && args[0].equals("give")) {
             Player target = Bukkit.getPlayerExact(args[1]);
             int amount = Integer.parseInt(args[3]);
 
 
             switch (args[2]) {
                 case "doublexp" -> {
-                    argsCheck(player, args);
+                    misc.usage(player);
                     if (target.getPlayer() == null) {
                         player.sendMessage(CC.translate("&cPlayer is not online"));
                     }
@@ -58,7 +58,7 @@ public class BoosterCommands extends SubCommand {
                             .replace("%item-name", Boosters.DOUBLE_EXP.getDisplayName()));
                 }
                 case "2xmultiplier" -> {
-                    argsCheck(player, args);
+                    misc.usage(player);
                     if (target.getPlayer() == null) {
                         player.sendMessage(CC.translate("&cPlayer is not online"));
                     }
@@ -68,7 +68,7 @@ public class BoosterCommands extends SubCommand {
                             .replace("%item-name", Boosters.X2MULTIPLIER.getDisplayName()));
                 }
                 case "3xmultiplier" -> {
-                    argsCheck(player, args);
+                    misc.usage(player);
                     if (target.getPlayer() == null) {
                         player.sendMessage(CC.translate("&cPlayer is not online"));
                     }
@@ -82,9 +82,4 @@ public class BoosterCommands extends SubCommand {
     }
 
 
-    private void argsCheck(Player player, String[] args) {
-        if (args.length < 4) {
-            misc.usage(player);
-        }
-    }
 }
